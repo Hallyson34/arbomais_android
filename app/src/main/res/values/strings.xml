@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ArboMaisAndroid</string>
+    <string name="welcome">Bem vindo ao Arbo+</string>
+    <string name="name">Nome</string>
+    <string name="hint_name">Digite aqui seu nome</string>
+    <string name="password">Senha</string>
+    <string name="hint_password">Digite aqui sua senha</string>
+    <string name="login">Entrar</string>
+    <string name="new_account">Criar Conta</string>
+</resources>
