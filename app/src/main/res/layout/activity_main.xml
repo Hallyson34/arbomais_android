@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/edtTextNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/edtTextSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -62,10 +62,10 @@
         android:layout_marginTop="27dp"
         android:text="@string/password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/edtTextNome" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnEntrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
@@ -74,16 +74,16 @@
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintStart_toEndOf="@+id/btnCriar"
+        app:layout_constraintTop_toBottomOf="@+id/edtTextSenha" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnCriar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="176dp"
         android:text="@string/new_account"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintTop_toBottomOf="@+id/edtTextSenha" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,21 +4,40 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity()
+import com.example.arbomaisandroid.utils.Hashing;
+
+@Entity
 public class Usuario {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private int arvoresId[];
-    private String nome;
-    private String senha;
-    private TipoUsuario tipo;
+    String nome;
+    String senha;
+    TipoUsuario tipo;
+    boolean ativo;
 
     public Usuario(){}
 
-    public Usuario(String nome, String senha, TipoUsuario tipo) {
+    public Usuario(String nome, String senha, TipoUsuario tipo, boolean ativo) {
         this.nome = nome;
         this.senha = senha;
         this.tipo = tipo;
+        this.ativo = ativo;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNome() {

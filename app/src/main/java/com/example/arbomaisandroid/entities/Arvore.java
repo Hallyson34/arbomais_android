@@ -4,19 +4,22 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(foreignKeys = @ForeignKey(entity = Usuario.class,
-        parentColumns = "usuarioId", childColumns = "usuarioId"))
+        parentColumns = "id", childColumns = "usuarioId"))
 public class Arvore {
     @PrimaryKey(autoGenerate = true)
-    int id;
-    private int usuarioId;
-    private String especie;
-    private String classe;
-    private String genero;
-    private int altura;
-    private String endereco;
-    private boolean podaMalFeita;
-    private boolean riscoFiosEnergia;
+    public int id;
+    public int usuarioId;
+    String especie;
+    String classe;
+    String genero;
+    int altura;
+    String endereco;
+    boolean podaMalFeita;
+    boolean riscoFiosEnergia;
+    String createdAt;
 
     public Arvore() {}
     public Arvore(int usuarioId, String especie, String classe, String genero, int altura, String endereco, boolean podaMalFeita, boolean riscoFiosEnergia) {
@@ -28,6 +31,7 @@ public class Arvore {
         this.endereco = endereco;
         this.podaMalFeita = podaMalFeita;
         this.riscoFiosEnergia = riscoFiosEnergia;
+        this.createdAt = new Date().toString();
     }
 
     public int getUsuarioId() {
@@ -92,6 +96,14 @@ public class Arvore {
 
     public void setRiscoFiosEnergia(boolean riscoFiosEnergia) {
         this.riscoFiosEnergia = riscoFiosEnergia;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

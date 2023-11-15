@@ -6,6 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.arbomaisandroid.dao.ArvoreDao;
+import com.example.arbomaisandroid.dao.UsuarioDao;
 import com.example.arbomaisandroid.entities.Arvore;
 import com.example.arbomaisandroid.entities.Usuario;
 
@@ -15,11 +17,11 @@ public abstract class LocalDatabase extends RoomDatabase {
     public static LocalDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    LocalDatabase.class, "ArboMais").allowMainThreadQueries().build();
+                    LocalDatabase.class, "ArboMais").allowMainThreadQueries().
+                    fallbackToDestructiveMigration().build();
         }
         return INSTANCE;
     }
-//    public abstract TipoDao tipoModel();
-//    public abstract ObjetoDao objetoModel();
-//    public abstract ObjetoTipoDao objetoTipoModel();
+    public abstract ArvoreDao arvoreModel();
+    public abstract UsuarioDao usuarioModel();
 }
