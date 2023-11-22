@@ -4,34 +4,36 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity(foreignKeys = @ForeignKey(entity = Usuario.class,
-        parentColumns = "id", childColumns = "usuarioId"))
+        parentColumns = "id", childColumns = "usuarioId",
+        onDelete = ForeignKey.CASCADE))
 public class Arvore {
     @PrimaryKey(autoGenerate = true)
     public int id;
     public int usuarioId;
     String especie;
-    String classe;
-    String genero;
-    int altura;
-    String endereco;
-    boolean podaMalFeita;
-    boolean riscoFiosEnergia;
+    float altura;
     String createdAt;
 
     public Arvore() {}
-    public Arvore(int usuarioId, String especie, String classe, String genero, int altura, String endereco, boolean podaMalFeita, boolean riscoFiosEnergia) {
+    public Arvore(int usuarioId, String especie, float altura) {
         this.usuarioId = usuarioId;
         this.especie = especie;
-        this.classe = classe;
-        this.genero = genero;
         this.altura = altura;
-        this.endereco = endereco;
-        this.podaMalFeita = podaMalFeita;
-        this.riscoFiosEnergia = riscoFiosEnergia;
-        this.createdAt = new Date().toString();
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        this.createdAt = sdf.format(now);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUsuarioId() {
@@ -50,53 +52,14 @@ public class Arvore {
         this.especie = especie;
     }
 
-    public String getClasse() {
-        return classe;
-    }
-
-    public void setClasse(String classe) {
-        this.classe = classe;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public int getAltura() {
+    public float getAltura() {
         return altura;
     }
 
-    public void setAltura(int altura) {
+    public void setAltura(float altura) {
         this.altura = altura;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public boolean isPodaMalFeita() {
-        return podaMalFeita;
-    }
-
-    public void setPodaMalFeita(boolean podaMalFeita) {
-        this.podaMalFeita = podaMalFeita;
-    }
-
-    public boolean isRiscoFiosEnergia() {
-        return riscoFiosEnergia;
-    }
-
-    public void setRiscoFiosEnergia(boolean riscoFiosEnergia) {
-        this.riscoFiosEnergia = riscoFiosEnergia;
-    }
 
     public String getCreatedAt() {
         return createdAt;
@@ -108,6 +71,6 @@ public class Arvore {
 
     @Override
     public String toString() {
-        return this.getEspecie() +  ", Classe: " + this.getClasse() + ", Endereço: " + this.getEndereco();
+        return this.getEspecie();
     }
 }

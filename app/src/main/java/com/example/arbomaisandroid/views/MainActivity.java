@@ -1,18 +1,21 @@
-package com.example.arbomaisandroid;
+package com.example.arbomaisandroid.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.arbomaisandroid.R;
 import com.example.arbomaisandroid.database.LocalDatabase;
 import com.example.arbomaisandroid.entities.TipoUsuario;
 import com.example.arbomaisandroid.entities.Usuario;
 import com.example.arbomaisandroid.utils.Hashing;
+import com.example.arbomaisandroid.views.arvore.ArvoreListView;
 
 public class MainActivity extends AppCompatActivity {
     private LocalDatabase db;
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtSenha;
     private Button btnEntrar;
     private Button btnCriar;
+    private Usuario usuarioLogado;
+    private Intent arvoreListViewIntent;
 
 
     @SuppressLint("MissingInflatedId")
@@ -33,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
         edtSenha = findViewById(R.id.edtTextSenha);
         btnEntrar = findViewById(R.id.btnEntrar);
         btnCriar = findViewById(R.id.btnCriar);
+        arvoreListViewIntent = new Intent(this, ArvoreListView.class);
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                if (login()) {
+                    showArvoresListView();
+                };
             }
         });
         btnCriar.setOnClickListener(new View.OnClickListener() {
@@ -44,15 +52,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 cadastrarUsuario(edtNome.getText().toString(), edtSenha.getText().toString(),
                         TipoUsuario.STANDARD, false);
-                Toast.makeText(getApplicationContext(),
-                        "Aguarde o administrador confirmar seu cadastro.", Toast.LENGTH_SHORT)
-                        .show();
             }
         });
     }
 
     private void insertFirstAdmin() {
-        cadastrarUsuario("ADM", "ADM", TipoUsuario.ADMIN, true);
+        Usuario admin = db.usuarioModel().getUsuarioByNome("ADM");
+        if(admin == null) {
+            Usuario usuario = new Usuario("ADM", "ADM", TipoUsuario.ADMIN, true);
+            usuario.setSenha(Hashing.hashPassword(usuario.getSenha()));
+            db.usuarioModel().insertAll(usuario);
+        }
     }
 
     private boolean login() {
@@ -69,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Senha incorreta!", Toast.LENGTH_SHORT).show();
             return false;
         }
+        usuarioLogado = usuarioCadastrado;
         return true;
     }
 
@@ -81,5 +92,15 @@ public class MainActivity extends AppCompatActivity {
         Usuario usuario = new Usuario(nome, senha, tipoUsuario, ativo);
         usuario.setSenha(Hashing.hashPassword(usuario.getSenha()));
         db.usuarioModel().insertAll(usuario);
+        Toast.makeText(getApplicationContext(),
+                        "Aguarde o administrador confirmar seu cadastro.", Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    private void showArvoresListView() {
+        System.out.println(usuarioLogado.toString());
+        arvoreListViewIntent.putExtra("USUARIO_ID", usuarioLogado.getId());
+        arvoreListViewIntent.putExtra("USUARIO_TIPO", usuarioLogado.getTipo());
+        startActivity(arvoreListViewIntent);
     }
 }

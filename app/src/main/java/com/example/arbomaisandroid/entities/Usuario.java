@@ -9,7 +9,7 @@ import com.example.arbomaisandroid.utils.Hashing;
 @Entity
 public class Usuario {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int id;
     String nome;
     String senha;
     TipoUsuario tipo;
