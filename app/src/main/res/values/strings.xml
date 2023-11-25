@@ -19,4 +19,5 @@
     <string name="height">Altura(Em centímetros)</string>
     <string name="new_password">Nova senha</string>
     <string name="exit">Sair</string>
+    <string name="add_picture">Adicionar Foto</string>
 </resources>
