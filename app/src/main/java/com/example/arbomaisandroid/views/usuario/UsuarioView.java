@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,7 @@ import com.example.arbomaisandroid.entities.TipoUsuario;
 import com.example.arbomaisandroid.entities.Usuario;
 import com.example.arbomaisandroid.utils.ConvertFloat;
 import com.example.arbomaisandroid.utils.Hashing;
+import com.example.arbomaisandroid.views.MainActivity;
 import com.example.arbomaisandroid.views.arvore.ArvoreView;
 
 import java.util.List;
@@ -36,6 +38,7 @@ public class UsuarioView extends AppCompatActivity {
     Button btnExcluir;
     Button btnSalvar;
     ListView listUsuarios;
+    Button btnSair;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,7 @@ public class UsuarioView extends AppCompatActivity {
         edtTextSenha = findViewById(R.id.edtTextSenha);
         btnExcluir = findViewById(R.id.btnExcluirUsuario);
         btnSalvar = findViewById(R.id.btnSalvarUsuario);
+        btnSair = findViewById(R.id.btnSairUsuario);
         listUsuarios = findViewById(R.id.listusuarios);
 
         txtVoltar.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +72,12 @@ public class UsuarioView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 excluirUsuario();
+            }
+        });
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitUsuario();
             }
         });
     }
@@ -174,5 +184,10 @@ public class UsuarioView extends AppCompatActivity {
                 })
                 .setNegativeButton("Não", null)
                 .show();
+    }
+
+    private void exitUsuario() {
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
     }
 }

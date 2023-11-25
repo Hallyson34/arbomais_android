@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showArvoresListView() {
-        System.out.println(usuarioLogado.toString());
         arvoreListViewIntent.putExtra("USUARIO_ID", usuarioLogado.getId());
         arvoreListViewIntent.putExtra("USUARIO_TIPO", usuarioLogado.getTipo());
         startActivity(arvoreListViewIntent);

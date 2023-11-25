@@ -11,7 +11,7 @@
         android:layout_width="49dp"
         android:layout_height="67sp"
         android:background="@color/primary"
-        android:src="@drawable/baseline_account_circle_24"
+        android:src="@drawable/baseline_account_circle_35"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtVoltarArvore"
         app:layout_constraintTop_toTopOf="parent" />
