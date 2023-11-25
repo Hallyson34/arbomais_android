@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
         btnCriar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cadastrarUsuario(edtNome.getText().toString(), edtSenha.getText().toString(),
-                        TipoUsuario.STANDARD, false);
+                if (!verifyFieldsEmpty()) {
+                    cadastrarUsuario(edtNome.getText().toString(), edtSenha.getText().toString(),
+                            TipoUsuario.STANDARD, false);
+                }
             }
         });
     }
@@ -63,6 +65,20 @@ public class MainActivity extends AppCompatActivity {
             usuario.setSenha(Hashing.hashPassword(usuario.getSenha()));
             db.usuarioModel().insertAll(usuario);
         }
+    }
+
+    private boolean verifyFieldsEmpty() {
+        String nome = edtNome.getText().toString();
+        if(nome.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha o campo nome!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        String senha = edtSenha.getText().toString();
+        if(senha.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Preencha o campo senha!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 
     private boolean login() {
