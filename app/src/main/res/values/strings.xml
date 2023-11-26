@@ -16,8 +16,10 @@
     <string name="delete">Excluir</string>
     <string name="save">Salvar</string>
     <string name="especie">Especie</string>
-    <string name="height">Altura(Em centímetros)</string>
+    <string name="height">Altura(cm)</string>
     <string name="new_password">Nova senha</string>
     <string name="exit">Sair</string>
     <string name="add_picture">Adicionar Foto</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
 </resources>

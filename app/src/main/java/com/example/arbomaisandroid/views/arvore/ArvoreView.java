@@ -41,6 +41,8 @@ public class ArvoreView extends AppCompatActivity {
     Button btnAddFoto;
     ImageView imageViewArvore;
     Bitmap imagemArvore;
+    EditText edtLatitude;
+    EditText edtLongitude;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,6 +61,8 @@ public class ArvoreView extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnSalvarArvore);
         imageViewArvore = findViewById(R.id.imgArvore);
         btnAddFoto = findViewById(R.id.btnAddFoto);
+        edtLatitude = findViewById(R.id.edtLatitude);
+        edtLongitude = findViewById(R.id.edtLongitude);
 
         txtVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,21 +113,30 @@ public class ArvoreView extends AppCompatActivity {
         Bitmap arvoreImg = arvore.getImagem();
         if(arvoreImg != null)
             imageViewArvore.setImageBitmap(arvoreImg);
+        edtLatitude.setText(arvore.getLatitude());
+        edtLongitude.setText(arvore.getLongitude());
     }
 
     private void editarArvore() {
         String especie = edtTextEspecie.getText().toString();
-        float altura = ConvertFloat.stringToFloat(edtNumberAltura.getText().toString());
         if (especie.isEmpty()) {
             Toast.makeText(this, "Certifique-se de preencher o campo especie.", Toast.LENGTH_SHORT).show();
             return;
         }
+        arvore.setEspecie(especie);
+
+        float altura = ConvertFloat.stringToFloat(edtNumberAltura.getText().toString());
         if (altura < 1) {
             Toast.makeText(this, "Certifique-se de digitar um número válido.", Toast.LENGTH_SHORT).show();
             return;
         }
-        arvore.setEspecie(especie);
         arvore.setAltura(altura);
+
+        String latitude = edtLatitude.getText().toString();
+        arvore.setLatitude(latitude);
+
+        String longitude = edtLongitude.getText().toString();
+        arvore.setLongitude(longitude);
 
         if (imagemArvore != arvore.getImagem()) {
             arvore.setImagem(imagemArvore);
@@ -153,7 +166,8 @@ public class ArvoreView extends AppCompatActivity {
             return;
         }
 
-        Arvore novaArvore = new Arvore(usuarioId, especie, altura, imagemArvore);
+        Arvore novaArvore = new Arvore(usuarioId, especie, altura, imagemArvore,
+                edtLatitude.getText().toString(), edtLongitude.getText().toString());
         db.arvoreModel().insertAll(novaArvore);
         Toast.makeText(this, "Árvore criada com sucesso.", Toast.LENGTH_SHORT).show();
         finish();
@@ -195,6 +209,12 @@ public class ArvoreView extends AppCompatActivity {
             imagemArvore = imageBitmap;
             imageViewArvore.setImageBitmap(imageBitmap);
         }
+    }
 
+    public void setUserLocation(double latitude, double longitude) {
+        if (arvoreId == -1) {
+            edtLatitude.setText(Double.toString(latitude));
+            edtLongitude.setText(Double.toString(longitude));
+        }
     }
 }

@@ -46,7 +46,6 @@ public class ArvoreListView extends AppCompatActivity {
         usuarioId = getIntent().getIntExtra(
                 "USUARIO_ID", -1);
         tipoUsuario = (TipoUsuario) getIntent().getSerializableExtra("USUARIO_TIPO");
-        System.out.println(usuarioId +  tipoUsuario.toString());
         txtEmptyTrees = findViewById(R.id.edtTextListaArvore);
         btnNovaArvore = findViewById(R.id.btnNovaArvore);
         userIcon = findViewById(R.id.userIcon);

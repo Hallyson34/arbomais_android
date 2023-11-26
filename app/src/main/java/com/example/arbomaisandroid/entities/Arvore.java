@@ -24,9 +24,11 @@ public class Arvore {
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     public byte[] imagem;
     String createdAt;
+    String latitude;
+    String longitude;
 
     public Arvore() {}
-    public Arvore(int usuarioId, String especie, float altura, Bitmap imagem) {
+    public Arvore(int usuarioId, String especie, float altura, Bitmap imagem, String latitude, String longitude) {
         this.setUsuarioId(usuarioId);
         this.setEspecie(especie);
         this.setAltura(altura);
@@ -34,6 +36,24 @@ public class Arvore {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         this.setCreatedAt(sdf.format(now));
+        this.setLatitude(latitude);
+        this.setLongitude(longitude);
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public Bitmap getImagem() {
